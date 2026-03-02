@@ -43,10 +43,9 @@ CandidateRepository candidateRepository;
     }
     private  List <Candidates> findTopCandidates(List<Candidates> candidates,Candidates winner){
         List<Candidates> topCandidates=new ArrayList<>();
-        Candidates toCompare=candidates.get(0);
         for (Candidates candidate:candidates) {
 
-            if (candidate.getVoteCount() == toCompare.getVoteCount()) {
+            if (candidate.getVoteCount() == winner.getVoteCount()) {
                 topCandidates.add(candidate);
             }
         }
