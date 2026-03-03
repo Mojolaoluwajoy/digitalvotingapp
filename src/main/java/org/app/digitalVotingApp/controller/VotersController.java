@@ -1,5 +1,6 @@
 package org.app.digitalVotingApp.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.app.digitalVotingApp.data.dtos.requests.VotersRegistrationRequest;
 import org.app.digitalVotingApp.data.dtos.responses.GenericResponse;
 import org.app.digitalVotingApp.data.dtos.responses.VotersResponses;
@@ -12,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping("/voters")
 public class VotersController {
@@ -26,7 +27,8 @@ public class VotersController {
         try {
             savedVoters = votersService.register(voters);
         } catch (VoterAlreadyExistException e) {
-            System.out.println(e.getMessage());
+         log.error(e.getMessage());
+         System.out.println(e.getMessage());
             GenericResponse response = GenericResponse.failed(e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
@@ -49,7 +51,7 @@ public class VotersController {
             VotersResponses votersResponses = votersService.findById(id);
             genericResponse=GenericResponse.success(votersResponses,"Voter found");
         }catch (VoterNotFoundException exception){
-            System.out.println(exception.getMessage());
+            log.error(exception.getMessage());
             return new ResponseEntity<>(GenericResponse.failed(exception.getMessage()),HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(genericResponse,HttpStatus.FOUND);

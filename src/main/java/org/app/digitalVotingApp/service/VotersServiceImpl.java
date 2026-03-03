@@ -1,5 +1,6 @@
 package org.app.digitalVotingApp.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.app.digitalVotingApp.data.dtos.requests.VotersRegistrationRequest;
 import org.app.digitalVotingApp.data.dtos.responses.VotersResponses;
 import org.app.digitalVotingApp.exceptions.VoterAlreadyExistException;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.app.digitalVotingApp.utils.VoterUtils.*;
+@Slf4j
 @Service
 public class VotersServiceImpl implements VotersService{
    @Autowired

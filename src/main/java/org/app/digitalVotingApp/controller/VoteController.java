@@ -1,5 +1,6 @@
 package org.app.digitalVotingApp.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.app.digitalVotingApp.data.dtos.requests.VoteRequest;
 import org.app.digitalVotingApp.data.dtos.responses.GenericResponse;
 import org.app.digitalVotingApp.data.dtos.responses.VoteRespose;
@@ -13,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping("/vote")
 public class VoteController {
@@ -26,7 +27,7 @@ public class VoteController {
       try {
           voteRespose = voteService.castVote(voteRequest);
       }catch (VoterNotFoundException e){
-          System.out.println(e.getMessage());
+         log.error(e.getMessage());
           return new ResponseEntity<>(GenericResponse.failed(e.getMessage()),HttpStatus.BAD_REQUEST);
       }catch (CandidateNotFoundException exception){
           return new ResponseEntity<>(GenericResponse.failed(exception.getMessage()),HttpStatus.BAD_REQUEST);
