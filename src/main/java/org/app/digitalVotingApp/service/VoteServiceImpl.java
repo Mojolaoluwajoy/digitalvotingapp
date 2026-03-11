@@ -59,7 +59,7 @@ private  VotersRepository votersRepository;
 
                 for (Vote savedVote : votes) {
                     VoteRespose voteRespose = new VoteRespose();
-                    voteRespose.setVoterId(savedVote.getId());
+                    voteRespose.setVoterId(savedVote.getVoteId());
                     voteRespose.setCandidateId(savedVote.getCandidateId());
                     voteResposeList.add(voteRespose);
                 }

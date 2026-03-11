@@ -1,14 +1,30 @@
 package org.app.digitalVotingApp.model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@Entity
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "voters")
 public class Voters {
-    private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "voters_id",nullable = false,unique = true)
+    private String votersId;
+    @Column(name = "first_name",nullable = false)
     private String firstName;
+    @Column(name = "last_name",nullable = false)
     private String lastName;
-     private String nin;
+    @Column(name = "voters_nin",nullable = false,unique = true,length = 11)
+    private String nin;
+    @Column(name="password",nullable = false)
+    private String password;
 
 }

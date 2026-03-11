@@ -1,7 +1,6 @@
 package org.app.digitalVotingApp.repository;
 
 import org.app.digitalVotingApp.exceptions.VoterAlreadyExistException;
-import org.app.digitalVotingApp.exceptions.VoterNotFoundException;
 import org.app.digitalVotingApp.model.Voters;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +21,7 @@ public Voters addUser(Voters user){
 
     public Voters findById(String voterId){
     for (Voters voter: votersList){
-        if (voter.getId().equalsIgnoreCase(voterId)){
+        if (voter.getVotersId().equalsIgnoreCase(voterId)){
             return voter;
         }
     }

@@ -19,7 +19,7 @@ public class CandidateRepository {
 
     public Candidates findCandidateById(String id){
         for (Candidates candidate : candidatesList){
-            if (candidate.getId().equals(id)){
+            if (candidate.getCandidateId().equals(id)){
                 return  candidate;
             }
         }

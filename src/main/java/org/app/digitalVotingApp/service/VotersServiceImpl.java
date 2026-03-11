@@ -41,7 +41,7 @@ public class VotersServiceImpl implements VotersService{
         public VotersResponses findById(String id)throws VoterNotFoundException{
        Voters voter=voterRepository.findById(id);
        if (voter==null){
-           throw new VoterNotFoundException(String.format("Voter with ID: %s does not exist",voter.getId()));
+           throw new VoterNotFoundException(String.format("Voter with ID: %s does not exist",voter.getVotersId()));
        }
        return map(voter);
         }
@@ -53,7 +53,7 @@ public class VotersServiceImpl implements VotersService{
        List <VotersResponses> votersList=new ArrayList<>();
        for (Voters savedVoter: voters){
            VotersResponses votersResponses =new VotersResponses();
-           votersResponses.setId(savedVoter.getId());
+           votersResponses.setId(savedVoter.getVotersId());
            votersResponses.setFirstName(savedVoter.getFirstName());
            votersResponses.setLastName(savedVoter.getLastName());
            votersList.add(votersResponses);

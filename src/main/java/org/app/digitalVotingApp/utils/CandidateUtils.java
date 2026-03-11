@@ -10,7 +10,7 @@ public class CandidateUtils {
 
     public static CandidatesResponse map(Candidates savedCandidate) {
         CandidatesResponse responses=new CandidatesResponse();
-        responses.setId(savedCandidate.getId());
+        responses.setId(savedCandidate.getCandidateId());
         responses.setFirstName(savedCandidate.getFirstName());
         responses.setLastName(savedCandidate.getLastName());
         responses.setPartyName(savedCandidate.getPartyName());
@@ -20,7 +20,7 @@ public class CandidateUtils {
 
     public static Candidates map(CandidateRegistrationRequest pollCreationRequest) {
         Candidates poll=new Candidates();
-        poll.setId(UUID.randomUUID().toString());
+        poll.setCandidateId(UUID.randomUUID().toString());
         poll.setFirstName(pollCreationRequest.getFirstName());
         poll.setLastName(pollCreationRequest.getLastName());
         poll.setPartyName(pollCreationRequest.getPartyName());

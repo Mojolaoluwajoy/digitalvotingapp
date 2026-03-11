@@ -50,7 +50,7 @@ public class CandidateServiceImpl implements CandidateService{
     public CandidatesResponse getCandidateById(String id) throws CandidateNotFoundException{
         Candidates candidate=candidateRepository.findCandidateById(id);
         if (candidate ==null){
-            throw  new CandidateNotFoundException(String.format("Candidate with ID: %s does not exist",candidate.getId()));
+            throw  new CandidateNotFoundException(String.format("Candidate with ID: %s does not exist",candidate.getCandidateId()));
         }
 
         return map(candidate);
@@ -65,7 +65,7 @@ public class CandidateServiceImpl implements CandidateService{
 
         for (Candidates savedCandidate:candidates){
             CandidatesResponse responses=new CandidatesResponse();
-            responses.setId(savedCandidate.getId());
+            responses.setId(savedCandidate.getCandidateId());
             responses.setFirstName(savedCandidate.getFirstName());
             responses.setLastName(savedCandidate.getLastName());
             responses.setPartyName(savedCandidate.getPartyName());

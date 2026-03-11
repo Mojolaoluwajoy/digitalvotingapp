@@ -10,17 +10,18 @@ public class VoterUtils {
 
     public static VotersResponses map(Voters savedVoters){
         VotersResponses votersResponses =new VotersResponses();
-        votersResponses.setId(savedVoters.getId());
+        votersResponses.setId(savedVoters.getVotersId());
         votersResponses.setFirstName(savedVoters.getFirstName());
         votersResponses.setLastName(savedVoters.getLastName());
         return votersResponses;
     }
     public static Voters map(VotersRegistrationRequest registrationRequest){
       Voters user=  new Voters();
-        user.setId(UUID.randomUUID().toString());
+        user.setVotersId(UUID.randomUUID().toString());
         user.setFirstName(registrationRequest.getFirstName());
          user.setLastName(registrationRequest.getLastName());
          user.setNin(registrationRequest.getNin());
+         user.setPassword(registrationRequest.getPassword());
          return user;
     }
 }
