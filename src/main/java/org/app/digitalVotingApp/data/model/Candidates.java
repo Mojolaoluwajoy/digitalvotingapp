@@ -1,4 +1,4 @@
-package org.app.digitalVotingApp.model;
+package org.app.digitalVotingApp.data.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,8 +22,7 @@ public class Candidates {
     private String partyName;
     @Column(name = "nin",nullable = false,unique = true)
     private String nin;
-    @Column(name = "vote_count")
-    private int voteCount;
+     private int voteCount;
 
     public void incrementVote(){
         voteCount=1+getVoteCount();

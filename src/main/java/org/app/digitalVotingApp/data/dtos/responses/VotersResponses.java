@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class VotersResponses {
-    private String id;
+    private String votersId;
     private String firstName;
     private String lastName;
 

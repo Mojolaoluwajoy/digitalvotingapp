@@ -1,11 +1,12 @@
-package org.app.digitalVotingApp.model;
+package org.app.digitalVotingApp.data.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.app.digitalVotingApp.enums.ElectionStatusEnum;
+import org.app.digitalVotingApp.data.enums.ElectionStatusEnum;
+import org.app.digitalVotingApp.data.model.Candidates;
 
 import java.util.List;
-import java.util.UUID;
+
 @Setter
 @Getter
 public class ElectionResult {

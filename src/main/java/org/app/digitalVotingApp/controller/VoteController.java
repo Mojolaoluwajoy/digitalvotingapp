@@ -22,18 +22,8 @@ public class VoteController {
     private VoteService voteService;
 
     @PostMapping("/castVote")
-    public ResponseEntity<GenericResponse> castVote(@RequestBody VoteRequest voteRequest) {
-        VoteRespose voteRespose;
-      try {
-          voteRespose = voteService.castVote(voteRequest);
-      }catch (VoterNotFoundException e){
-         log.error(e.getMessage());
-          return new ResponseEntity<>(GenericResponse.failed(e.getMessage()),HttpStatus.BAD_REQUEST);
-      }catch (CandidateNotFoundException exception){
-          return new ResponseEntity<>(GenericResponse.failed(exception.getMessage()),HttpStatus.BAD_REQUEST);
-      }catch (AlreadyVotedException exception){
-          return new ResponseEntity<>(GenericResponse.failed(exception.getMessage()),HttpStatus.BAD_REQUEST);
-      }
+    public ResponseEntity<GenericResponse> castVote(@RequestBody VoteRequest voteRequest) throws  VoterNotFoundException,CandidateNotFoundException,AlreadyVotedException{
+        VoteRespose voteRespose= voteService.castVote(voteRequest);
 return new ResponseEntity<>(GenericResponse.success(voteRespose,"Vote taken successfully"),HttpStatus.ACCEPTED);
     }
 

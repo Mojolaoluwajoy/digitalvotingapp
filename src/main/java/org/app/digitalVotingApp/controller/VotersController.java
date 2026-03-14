@@ -18,24 +18,16 @@ import java.util.List;
 @RequestMapping("/voters")
 public class VotersController {
 
-    @Autowired
-    VotersServiceImpl votersService;
+  private final   VotersServiceImpl votersService;
+
+  public VotersController(VotersServiceImpl votersService){
+      this.votersService=votersService;
+  }
 
     @PostMapping("/registerVoters")
-    public ResponseEntity<GenericResponse> registerVoters(@RequestBody VotersRegistrationRequest voters) {
-        VotersResponses savedVoters = null;
-        try {
-            savedVoters = votersService.register(voters);
-        } catch (VoterAlreadyExistException e) {
-         log.error(e.getMessage());
-         System.out.println(e.getMessage());
-            GenericResponse response = GenericResponse.failed(e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
-
+    public ResponseEntity<GenericResponse> registerVoters(@RequestBody VotersRegistrationRequest voters) throws VoterAlreadyExistException {
+      VotersResponses savedVoters = votersService.register(voters);
         return new ResponseEntity<>(GenericResponse.success(savedVoters, "Registration successful"), HttpStatus.CREATED);
-
-
     }
 
     @GetMapping("/all")
@@ -45,15 +37,8 @@ public class VotersController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity <GenericResponse> findVoterById(@PathVariable String id){
-        GenericResponse genericResponse;
-        try {
-            VotersResponses votersResponses = votersService.findById(id);
-            genericResponse=GenericResponse.success(votersResponses,"Voter found");
-        }catch (VoterNotFoundException exception){
-            log.error(exception.getMessage());
-            return new ResponseEntity<>(GenericResponse.failed(exception.getMessage()),HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(genericResponse,HttpStatus.FOUND);
-    }
+    public ResponseEntity <GenericResponse> findVoterById(@PathVariable String id)throws VoterNotFoundException{
+        VotersResponses votersResponses = votersService.findById(id);
+           return new ResponseEntity<>(GenericResponse.success(votersResponses,"Voter found"),HttpStatus.FOUND );
+           }
 }

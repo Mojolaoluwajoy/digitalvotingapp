@@ -6,10 +6,10 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CandidatesResponse {
-    private String id;
+    private String candidateId;
     private String firstName;
     private String lastName;
     private String partyName;
-    private int voteCount;
+
 
 }

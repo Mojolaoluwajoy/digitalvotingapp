@@ -21,32 +21,19 @@ public class CandidateController {
     CandidateServiceImpl candidateService;
 
     @PostMapping("/register")
-    public ResponseEntity<GenericResponse> registerCandidates(@RequestBody CandidateRegistrationRequest candidate){
-        CandidatesResponse savedVoters=null;
-        try{
-            savedVoters=candidateService.register(candidate);
-        }catch(CandidateAlreadyExistException exception){
-           log.error(exception.getMessage());
-            GenericResponse genericResponse=GenericResponse.failed(exception.getMessage());
-            return new ResponseEntity<>(genericResponse, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<GenericResponse> registerCandidates(@RequestBody CandidateRegistrationRequest candidate)throws CandidateAlreadyExistException{
+        CandidatesResponse savedVoters=candidateService.register(candidate);
         return new ResponseEntity<>(GenericResponse.success(savedVoters,"Candidate successfully registered"),HttpStatus.CREATED);
     }
+
     @GetMapping("/all")
     public ResponseEntity<GenericResponse> getAllCandidates(){
         List<CandidatesResponse> candidate=candidateService.getAll();
         return new ResponseEntity<>(GenericResponse.success(candidate,"All Candidates"),HttpStatus.ACCEPTED);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<GenericResponse> findById(@PathVariable String id){
-        CandidatesResponse savedCandidate=null;
-        try {
-
-            savedCandidate = candidateService.getCandidateById(id);
-         }catch (CandidateNotFoundException exception){
-          log.error(exception.getMessage());
-          return new ResponseEntity<>(GenericResponse.failed(exception.getMessage()) ,HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<GenericResponse> findById(@PathVariable String id)throws CandidateNotFoundException{
+        CandidatesResponse savedCandidate=candidateService.getCandidateById(id);
         return new ResponseEntity<>(GenericResponse.success(savedCandidate,"Candidate Found"),HttpStatus.FOUND);
 
     }

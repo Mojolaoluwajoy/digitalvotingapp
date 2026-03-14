@@ -4,7 +4,6 @@ import org.app.digitalVotingApp.data.dtos.requests.VotersRegistrationRequest;
 import org.app.digitalVotingApp.data.dtos.responses.VotersResponses;
 import org.app.digitalVotingApp.exceptions.VoterAlreadyExistException;
 import org.app.digitalVotingApp.exceptions.VoterNotFoundException;
-import org.app.digitalVotingApp.model.Voters;
 
 import java.util.List;
 

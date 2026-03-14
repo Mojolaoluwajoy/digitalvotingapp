@@ -2,7 +2,7 @@ package org.app.digitalVotingApp.utils;
 
 import org.app.digitalVotingApp.data.dtos.requests.CandidateRegistrationRequest;
 import org.app.digitalVotingApp.data.dtos.responses.CandidatesResponse;
-import org.app.digitalVotingApp.model.Candidates;
+import org.app.digitalVotingApp.data.model.Candidates;
 
 import java.util.UUID;
 
@@ -10,11 +10,10 @@ public class CandidateUtils {
 
     public static CandidatesResponse map(Candidates savedCandidate) {
         CandidatesResponse responses=new CandidatesResponse();
-        responses.setId(savedCandidate.getCandidateId());
+        responses.setCandidateId(savedCandidate.getCandidateId());
         responses.setFirstName(savedCandidate.getFirstName());
         responses.setLastName(savedCandidate.getLastName());
         responses.setPartyName(savedCandidate.getPartyName());
-        responses.setVoteCount(savedCandidate.getVoteCount());
          return  responses;
     }
 

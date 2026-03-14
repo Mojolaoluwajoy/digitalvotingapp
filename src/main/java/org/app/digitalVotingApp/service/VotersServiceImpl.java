@@ -5,8 +5,8 @@ import org.app.digitalVotingApp.data.dtos.requests.VotersRegistrationRequest;
 import org.app.digitalVotingApp.data.dtos.responses.VotersResponses;
 import org.app.digitalVotingApp.exceptions.VoterAlreadyExistException;
 import org.app.digitalVotingApp.exceptions.VoterNotFoundException;
-import org.app.digitalVotingApp.model.Voters;
-import org.app.digitalVotingApp.repository.VotersRepository;
+import org.app.digitalVotingApp.data.model.Voters;
+import org.app.digitalVotingApp.data.repository.VotersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,25 +24,21 @@ public class VotersServiceImpl implements VotersService{
     public VotersResponses register(VotersRegistrationRequest registrationRequest)
             throws VoterAlreadyExistException {
         String nin = registrationRequest.getNin();
+          if ( voterRepository.findByNin(nin).isPresent())
+            throw  new VoterAlreadyExistException ("Voter with this nin  already exist" );
 
-       voterRepository.validateUserExistenceByNin(nin);
         Voters voters = map(registrationRequest);
 
-        Voters savedVoters =voterRepository.addUser(voters);
+        Voters savedVoters =voterRepository.save(voters);
         return map(savedVoters);
-    }
-
-    public Voters findByNin(String nin){
-        return voterRepository.findByNin(nin);
     }
 
 
         @Override
-        public VotersResponses findById(String id)throws VoterNotFoundException{
-       Voters voter=voterRepository.findById(id);
-       if (voter==null){
-           throw new VoterNotFoundException(String.format("Voter with ID: %s does not exist",voter.getVotersId()));
-       }
+        public VotersResponses findById(String votersId)throws VoterNotFoundException{
+            Voters voter=voterRepository.findByVotersId(votersId)
+                    .orElseThrow(()-> new VoterNotFoundException("There's no voter registered to this Nin"));
+
        return map(voter);
         }
 
@@ -53,7 +49,7 @@ public class VotersServiceImpl implements VotersService{
        List <VotersResponses> votersList=new ArrayList<>();
        for (Voters savedVoter: voters){
            VotersResponses votersResponses =new VotersResponses();
-           votersResponses.setId(savedVoter.getVotersId());
+           votersResponses.setVotersId(savedVoter.getVotersId());
            votersResponses.setFirstName(savedVoter.getFirstName());
            votersResponses.setLastName(savedVoter.getLastName());
            votersList.add(votersResponses);

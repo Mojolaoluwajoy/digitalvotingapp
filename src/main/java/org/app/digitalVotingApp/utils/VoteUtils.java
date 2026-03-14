@@ -2,8 +2,8 @@ package org.app.digitalVotingApp.utils;
 
 import org.app.digitalVotingApp.data.dtos.requests.VoteRequest;
 import org.app.digitalVotingApp.data.dtos.responses.VoteRespose;
-import org.app.digitalVotingApp.model.Vote;
-import org.app.digitalVotingApp.model.Voters;
+import org.app.digitalVotingApp.data.model.Vote;
+import org.app.digitalVotingApp.data.model.Voters;
 
 import java.util.UUID;
 
@@ -13,7 +13,7 @@ public class VoteUtils {
         VoteRespose responses=new VoteRespose();
         responses.setVoteId(savedVote.getVoteId());
         responses.setCandidateId(savedVote.getCandidateId());
-        responses.setVoterId(voter.getVotersId());
+        responses.setVotersId(voter.getVotersId());
          return  responses;
     }
 

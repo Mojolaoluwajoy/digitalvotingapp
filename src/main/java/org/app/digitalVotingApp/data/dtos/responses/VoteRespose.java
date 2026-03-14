@@ -8,6 +8,6 @@ import lombok.Setter;
 public class VoteRespose {
     private String voteId;
     private String candidateId;
-private String voterId;
+private String votersId;
 
 }

@@ -1,10 +1,10 @@
 package org.app.digitalVotingApp.service;
 
-import org.app.digitalVotingApp.enums.ElectionStatusEnum;
+import org.app.digitalVotingApp.data.enums.ElectionStatusEnum;
 import org.app.digitalVotingApp.exceptions.EmptyCandidateListException;
-import org.app.digitalVotingApp.model.Candidates;
-import org.app.digitalVotingApp.model.ElectionResult;
-import org.app.digitalVotingApp.repository.CandidateRepository;
+import org.app.digitalVotingApp.data.model.Candidates;
+import org.app.digitalVotingApp.data.dtos.ElectionResult;
+import org.app.digitalVotingApp.data.repository.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

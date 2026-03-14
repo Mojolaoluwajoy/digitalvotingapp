@@ -1,4 +1,4 @@
-package org.app.digitalVotingApp.model;
+package org.app.digitalVotingApp.data.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
