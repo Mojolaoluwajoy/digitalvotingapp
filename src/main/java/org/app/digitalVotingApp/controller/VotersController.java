@@ -30,7 +30,7 @@ public class VotersController {
         return new ResponseEntity<>(GenericResponse.success(savedVoters, "Registration successful"), HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<GenericResponse> getAllVoters(){
         List<VotersResponses> voters=votersService.getAll();
         return new ResponseEntity<>(GenericResponse.success(voters,"Voters found"),HttpStatus.ACCEPTED);
