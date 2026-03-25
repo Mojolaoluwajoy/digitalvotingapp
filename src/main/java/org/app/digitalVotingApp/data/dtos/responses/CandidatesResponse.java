@@ -6,10 +6,11 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CandidatesResponse {
-    private String candidateId;
+    private String publicId;
     private String firstName;
     private String lastName;
     private String partyName;
+    private String email;
 
 
 }

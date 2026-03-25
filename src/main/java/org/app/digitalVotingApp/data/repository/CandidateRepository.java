@@ -1,6 +1,6 @@
 package org.app.digitalVotingApp.data.repository;
 
-import org.app.digitalVotingApp.data.model.Candidates;
+import org.app.digitalVotingApp.data.model.CandidateProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,10 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CandidateRepository extends JpaRepository<Candidates,Long> {
-
-
-
-   Optional<Candidates> findByCandidateId(String candidateId);
+public interface CandidateRepository extends JpaRepository<CandidateProfile,Long> {
 
 }

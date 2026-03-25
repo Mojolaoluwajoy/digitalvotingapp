@@ -6,10 +6,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CandidateRegistrationRequest {
-    private String firstName;
-    private String lastName;
+   private String userId;
     private String partyName;
-    private String nin;
 
 
 }

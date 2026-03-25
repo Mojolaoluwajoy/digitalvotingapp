@@ -20,21 +20,11 @@ public class CandidateController {
     @Autowired
     CandidateServiceImpl candidateService;
 
-    @PostMapping("/register")
-    public ResponseEntity<GenericResponse> registerCandidates(@RequestBody CandidateRegistrationRequest candidate)throws CandidateAlreadyExistException{
-        CandidatesResponse savedVoters=candidateService.register(candidate);
-        return new ResponseEntity<>(GenericResponse.success(savedVoters,"Candidate successfully registered"),HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<GenericResponse> completeCandidateRegistration(@RequestBody CandidateRegistrationRequest candidate){
+        CandidatesResponse savedVoters=candidateService.completeRegistration(candidate);
+        return new ResponseEntity<>(GenericResponse.success(savedVoters,"Candidate registration successfully completed"),HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<GenericResponse> getAllCandidates(){
-        List<CandidatesResponse> candidate=candidateService.getAll();
-        return new ResponseEntity<>(GenericResponse.success(candidate,"All Candidates"),HttpStatus.ACCEPTED);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<GenericResponse> findById(@PathVariable String id)throws CandidateNotFoundException{
-        CandidatesResponse savedCandidate=candidateService.getCandidateById(id);
-        return new ResponseEntity<>(GenericResponse.success(savedCandidate,"Candidate Found"),HttpStatus.FOUND);
 
-    }
 }

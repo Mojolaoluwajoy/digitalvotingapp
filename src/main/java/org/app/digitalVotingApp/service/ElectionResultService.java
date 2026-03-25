@@ -2,7 +2,7 @@ package org.app.digitalVotingApp.service;
 
 import org.app.digitalVotingApp.data.enums.ElectionStatusEnum;
 import org.app.digitalVotingApp.exceptions.EmptyCandidateListException;
-import org.app.digitalVotingApp.data.model.Candidates;
+import org.app.digitalVotingApp.data.model.CandidateProfile;
 import org.app.digitalVotingApp.data.dtos.ElectionResult;
 import org.app.digitalVotingApp.data.repository.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,34 +16,34 @@ public class ElectionResultService {
 CandidateRepository candidateRepository;
 
    public ElectionResult getResult()throws EmptyCandidateListException {
-        List<Candidates> candidates=candidateRepository.findAll();
-        Candidates winner =findWinner(candidates);
+        List<CandidateProfile> candidates=candidateRepository.findAll();
+        CandidateProfile winner =findWinner(candidates);
         int totalVoters=countTotalVoters(candidates);
-        List<Candidates> topCandidates=findTopCandidates(candidates, winner);
+        List<CandidateProfile> topCandidates=findTopCandidates(candidates, winner);
         return createResult(winner,topCandidates,candidates,totalVoters);
     }
-    public Candidates findWinner(List <Candidates> candidates)throws EmptyCandidateListException {
+    public CandidateProfile findWinner(List <CandidateProfile> candidates)throws EmptyCandidateListException {
       if (candidates.isEmpty()){
           throw new EmptyCandidateListException("No candidate found");
       }
-        Candidates winner=candidates.get(0);
-        for (Candidates candidate :candidates){
+        CandidateProfile winner=candidates.get(0);
+        for (CandidateProfile candidate :candidates){
             if (candidate.getVoteCount()>winner.getVoteCount()){
                 winner=candidate;
             }
         }
         return  winner;
     }
-    private  int countTotalVoters(List<Candidates> candidates){
+    private  int countTotalVoters(List<CandidateProfile> candidates){
         int totalVoters=0;
-        for (Candidates candidate:candidates){
+        for (CandidateProfile candidate:candidates){
             totalVoters+=candidate.getVoteCount();
         }
         return  totalVoters;
     }
-    private  List <Candidates> findTopCandidates(List<Candidates> candidates,Candidates winner){
-        List<Candidates> topCandidates=new ArrayList<>();
-        for (Candidates candidate:candidates) {
+    private  List <CandidateProfile> findTopCandidates(List<CandidateProfile> candidates, CandidateProfile winner){
+        List<CandidateProfile> topCandidates=new ArrayList<>();
+        for (CandidateProfile candidate:candidates) {
 
             if (candidate.getVoteCount() == winner.getVoteCount()) {
                 topCandidates.add(candidate);
@@ -51,7 +51,7 @@ CandidateRepository candidateRepository;
         }
         return  topCandidates;
     }
-    public  ElectionResult createResult(Candidates winner,List<Candidates> topCandidates,List<Candidates> candidates,int totalVoters){
+    public  ElectionResult createResult(CandidateProfile winner, List<CandidateProfile> topCandidates, List<CandidateProfile> candidates, int totalVoters){
       ElectionResult result;
       if (topCandidates.size()>1){
           result=new ElectionResult(ElectionStatusEnum.TIE,topCandidates,candidates,totalVoters,candidates.size());
