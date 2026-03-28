@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+
 @Entity
 @Setter
 @Getter
@@ -16,11 +19,14 @@ public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "vote_id",nullable = false,unique = true)
-   private  String voteId;
+    @Column(name = "public_id",nullable = false,unique = true)
+    private String publicId;
     @Column(name = "voter_nin",nullable = false,unique = true)
     private String voterNin;
     @Column(name = "candidate_id",nullable = false,unique = true)
     private  String candidateId;
+    @Column(name="voted_at",nullable = false)
+    private LocalDateTime votedAt=LocalDateTime.now();
+
 
 }
